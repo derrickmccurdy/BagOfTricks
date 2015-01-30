@@ -1,0 +1,27 @@
+You can even check all tables in all databases by specifying a wildcard with the path to the MySQL data directory:
+
+shell> myisamchk /path/to/datadir/*/*.MYI
+
+
+sudo myisamchk --silent --force --fast --update-state -O key_buffer=512M  -O sort_buffer=512M -O read_buffer=1M -O write_buffer=1M  /var/lib/mysql/datastore/tblmaster.MYI
+
+
+sudo myisamchk --silent --force --fast --update-state -O key_buffer=512M  -O sort_buffer=512M -O read_buffer=1M -O write_buffer=1M  /var/lib/mysql/d1*/*.MYI
+
+sudo myisamchk --silent --force --fast --update-state -O key_buffer=256M  -O sort_buffer=256M -O read_buffer=1M -O write_buffer=1M  /var/lib/mysql/d[0-9]*/*.MYI
+
+
+
+
+
+
+***********mysqlcheck must be run while mysqld is running. myisamchk must be run when mysqld is NOT running
+
+cd /var/lib/mysql ; sudo mysqlcheck --user=admin --password=spiedlen --databases `sudo ls -d d[0-9]*` >> /tmp/check 2>&1 ; vim /tmp/check +/"Corrupt"
+
+
+
+
+-- Fastest way to check for crashed tblmaster
+. BOT/SQL/shslave.sh "check table datastore.tblmaster quick"
+

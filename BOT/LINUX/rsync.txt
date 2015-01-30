@@ -1,0 +1,18 @@
+sudo rsync -avz -e ssh /var/lib/mysql/datastore/tblmaster.*  209.8.109.232:/var/lib/mysql/datastore/
+sudo rsync -avz -e ssh /var/lib/mysql/d6593  216.66.17.187:/var/lib/mysql/
+
+#copy from main master to experimental master
+sudo rsync -avz -e ssh /var/lib/mysql/datastore/tblmaster.*  63.216.48.223:/var/lib/mysql/datastore/
+
+
+#copy from main master to slave
+sudo rsync -avz -e ssh /var/lib/mysql/datastore/tblmaster.*  63.216.48.224:/var/lib/mysql/datastore/
+#OR
+#run this on source machine
+tar -zcf /home/01/derrick/tblmaster.tar.gz /var/lib/mysql/datastore/tblmaster.*
+#run this on destination machine
+tar -zxf /home01/derrick/tblmaster.tar.gz /var/lib/mysql/datastore/
+
+
+
+63.216.48.223

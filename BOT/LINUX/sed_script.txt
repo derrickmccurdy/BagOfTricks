@@ -1,0 +1,245 @@
+#!/bin/sed -f
+
+#BOT/LINUX/sed_script.txt < old_file > new_file
+
+#'1,$/.*<tr class=\'SearchResult\'/d'
+
+#1,$ s/.*<tr class='SearchResult'/<tr class='SearchResult'/
+
+1,/.*<tr class='SearchResult'/ d
+#</table>
+#
+#                                                </td>
+/^<\/tr>$\n\+^I\+\n\+^I\+<\/table>/,$ d
+
+
+#THIS WORKS!
+#sed -n -e '/<tr class=.*/ {
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#N
+#/\n<\/tr>/ p
+#}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+#<tr class='SearchResult' onmouseover="this.className = 'SearchResultHover';" onmouseout="this.className = 'SearchResult';" 
+#        id="DraggableItem_2631170" individualId="2631170" dataType="0">
+#        
+#        <td class="RowDrag" id="handleDraggableItem_2631170"><img src="/images/transparent.gif" border="0"></td>
+#        
+#        <td class="SRC"><input type="checkbox" id="addperson_2631170" name="addperson_2631170" value="4901_2631170" onclick="UpdateSelectedResult(this);" ></td>
+#                        
+#        <td class="SRC"><a href="/PowerApps/PersonDetail.aspx?PersonID=2631170" rel="nofollow" onmouseover="OpenPopupPerson(2631170, '',this,false);" onmouseout="ClosePopupProfile();" id="linkPerson_0034760f-a8a2-4508-97dc-a2cbc6721fc1">Cape, Wayne</a>&nbsp;<br><a href="mailto:wcape@optio.com">wcape@optio.com</a><br></td>
+#        <td class="SRC">Chairman, President and Chief Executive Officer&nbsp;</td>
+#        <td class="SRC"><a href="/PowerApps/CompanyDetail.aspx?CompanyID=52478513" onmouseover="OpenPopupCompany(52478513, '',this,false);" onmouseout="ClosePopupProfile();" id="lnka56790cf-3fd1-43db-8aa2-71ed334051a9">Optio Software Inc</a><br>(770) 576-3500&nbsp;</td>
+#        <td class="SRC">
+#                4/23/2008&nbsp;
+#        </td>
+#</tr>
+#
+#                                                
+#NEXT WE NEED TO CLEAN ALL THIS SHIT UP!
+#<tr class='SearchResult' onmouseover="this.className = 'SearchResultHover';" onmouseout="this.className = 'SearchResult';" 
+#        id="DraggableItem_3229713" individualId="3229713" dataType="0">
+#        
+#        <td class="RowDrag" id="handleDraggableItem_3229713"><img src="/images/transparent.gif" border="0"></td>
+#        
+#        <td class="SRC"><input type="checkbox" id="addperson_3229713" name="addperson_3229713" value="4902_3229713" onclick="UpdateSelectedResult(this);" ></td>
+#                        
+######LASTNAME, FIRSTNAME</a>&nbsp;<br>PHONENUM<br><a href="mailto:EMAIL">
+#        <td class="SRC"><a href="/PowerApps/PersonDetail.aspx?PersonID=3229713" rel="nofollow" onmouseover="OpenPopupPerson(3229713, '',this,false);" onmouseout="ClosePopupProfile();" id="linkPerson_d47f5d46-b52e-43a6-80b0-b2ac5f01d743">D'Amaro, Rich</a>&nbsp;<br>(404) 880-1310<br><a href="mailto:rdamaro@subsidiumhealth.com">rdamaro@subsidiumhealth.c...</a><br></td>
+######THEN THE NEXT <td> CONTAINS THE JOB TITLE
+#        <td class="SRC">Chairman and Chief Executive Officer&nbsp;</td>
+######COMPANY NAME
+#        <td class="SRC"><a href="/PowerApps/CompanyDetail.aspx?CompanyID=117244079" onmouseover="OpenPopupCompany(117244079, '',this,false);" onmouseout="ClosePopupProfile();" id="lnkbc4443e9-f867-426f-b1d5-462e2689f437">Tatum LLC</a><br>(404) 880-1300&nbsp;</td>
+#<tr class='SearchResult' onmouseover="this.className = 'SearchResultHover';" onmouseout="this.className = 'SearchResult';" 
+#        id="DraggableItem_1455606" individualId="1455606" dataType="0">
+#        
+#        <td class="RowDrag" id="handleDraggableItem_1455606"><img src="/images/transparent.gif" border="0"></td>
+#        
+#        <td class="SRC"><input type="checkbox" id="addperson_1455606" name="addperson_1455606" value="4903_1455606" onclick="UpdateSelectedResult(this);" ></td>
+#                        
+#        <td class="SRC"><a href="/PowerApps/PersonDetail.aspx?PersonID=1455606" rel="nofollow" onmouseover="OpenPopupPerson(1455606, '',this,false);" onmouseout="ClosePopupProfile();" id="linkPerson_18047fe9-319f-4396-9b9a-65720270717d">Markin, Rodney S.</a>&nbsp;<br>(402) 559-7687<br><a href="mailto:rmarkin@unmc.edu">rmarkin@unmc.edu</a><br></td>
+#        <td class="SRC">President and Chief Executive Officer&nbsp;</td>
+#        <td class="SRC"><a href="/PowerApps/CompanyDetail.aspx?CompanyID=149438578" onmouseover="OpenPopupCompany(149438578, '',this,false);" onmouseout="ClosePopupProfile();" id="lnkf2ce98a5-ad3b-4eaa-b54a-8fef9b1f7079">University of Nebraska Medical Center</a><br>(402) 559-4000&nbsp;</td>
+#        <td class="SRC">
+#                6/30/2009&nbsp;
+#        </td>
+#</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sed -n -e '/<tr class=.*/ {
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+s/linkPerson[^>]*>\(.*\)<\/tr>/\1/g
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+#THIS WORKS
+sed -n -r -e '/<tr class=.*/ {
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+/\n<\/tr>/ p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+
+#this works better
+sed -n -r -e '/^.*linkPerson[^>]*>/ {
+N
+N
+/\n.*<\/td>/ p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+
+sed -n -r '
+/^.*linkPerson[^>]*>/ {
+N
+N
+/\n.*<\/td>/ {
+x
+s/.*mailto:\([^"]*\)".*/\1/
+	}
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+#THIS WORKS TOO
+#NOW we are getting somewhere
+sed -n '
+/.*mailto:\([^"]*\)"/ {
+H
+n
+H
+n
+x
+s/.*mailto:\([^"]*\)".*/\1/
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+#THIS GETS first and last name and email address
+sed -n '
+/.*mailto:.*/ {
+H
+n
+H
+n
+x
+s/.*linkPerson[^>]*>\([^<]*\)<.*mailto:\([^"]*\)".*/\1 \2/
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+#gets firs, last email and next line containing job title
+sed -n '
+/.*mailto:.*/ {
+H
+n
+H
+n
+x
+s/.*linkPerson[^>]*>\([^<]*\)<.*mailto:\([^"]*\)".*\n\(.*\)/\1 \2 \3/
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+#gets first and last name in one field, gets email address in next field and gets jobtitle
+sed -n '
+/.*mailto:.*/ {
+H
+n
+H
+n
+x
+s/.*linkPerson[^>]*>\([^<]*\)<.*mailto:\([^"]*\)".*\n[^<]*[^>]*>\([^<]*\)<.*/\1	\2	\3/
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+
+
+
+#gets first, last email address, jobtitle, and companyname
+sed -n '
+/.*mailto:.*/ {
+H
+n
+H
+n
+H
+n
+x
+s/.*linkPerson[^>]*>\([^<]*\)<.*mailto:\([^"]*\)".*\n[^<]*[^>]*>\([^<]*\)<.*\n.*<a[^>]*>\([^<]*\)<.*/\1	\2	\3	\4/
+p
+}' /home/derrick/Desktop/Professional/EXPEDITE/PersonQuery.html2 | less
+

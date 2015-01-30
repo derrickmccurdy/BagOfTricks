@@ -1,0 +1,6 @@
+sudo rsync -avz -e ssh /var/lib/mysql/datastore/tblmaster.*  209.8.109.232:/var/lib/mysql/datastore/
+
+sudo rsync -avz -e ssh /var/lib/mysql/d6315  209.8.109.216:/var/lib/mysql/
+
+
+

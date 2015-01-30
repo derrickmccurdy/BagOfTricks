@@ -1,0 +1,1 @@
+sudo svn update 2> /tmp/asoiudf.txt > /tmp/asoiudf.txt

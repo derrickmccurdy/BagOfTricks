@@ -1,0 +1,1 @@
+select UPDATE_TIME, concat(TABLE_SCHEMA,'.',TABLE_NAME) as fqtname from information_schema.TABLES where TABLE_NAME like "r%" and TABLE_SCHEMA like "d%" and UPDATE_TIME < date_sub(now(), interval 48 hour) order by UPDATE_TIME asc ;

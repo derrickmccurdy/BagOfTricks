@@ -1,0 +1,42 @@
++---------------+------------------------------+------+-----+---------------------+----------------+
+| Field         | Type                         | Null | Key | Default             | Extra          |
++---------------+------------------------------+------+-----+---------------------+----------------+
+| id            | int(11)                      | NO   | PRI | NULL                | auto_increment | 
+| listid        | int(10)                      | YES  |     | NULL                |                | 
+| email         | varchar(200)                 | NO   |     | NULL                |                | 
+| email_hash    | bigint(17) unsigned zerofill | NO   | UNI | NULL                |                | 
+| firstname     | varchar(45)                  | NO   |     | NULL                |                | 
+| middlename    | varchar(45)                  | NO   |     | NULL                |                | 
+| lastname      | varchar(45)                  | NO   |     | NULL                |                | 
+| address       | varchar(250)                 | NO   |     | NULL                |                | 
+| address2      | varchar(250)                 | NO   |     | NULL                |                | 
+| city          | varchar(95)                  | NO   |     | NULL                |                | 
+| county        | varchar(100)                 | NO   |     | NULL                |                | 
+| region        | varchar(25)                  | NO   | MUL | NULL                |                | 
+| zipcode       | varchar(20)                  | NO   | MUL | 0                   |                | 
+| gender        | varchar(5)                   | NO   |     | NULL                |                | 
+| companyname   | varchar(45)                  | NO   | MUL | NULL                |                | 
+| jobtitle      | varchar(45)                  | NO   |     | NULL                |                | 
+| industry      | varchar(45)                  | NO   |     | NULL                |                | 
+| phonearea     | varchar(3)                   | NO   |     | NULL                |                | 
+| phonenum      | varchar(15)                  | NO   |     | NULL                |                | 
+| keywords      | varchar(250)                 | YES  | MUL | NULL                |                | 
+| born          | date                         | NO   |     | 0000-00-00          |                | 
+| source        | varchar(250)                 | NO   |     | NULL                |                | 
+| dtTimeStamp   | datetime                     | NO   |     | 0000-00-00 00:00:00 |                | 
+| dateadded     | date                         | NO   |     | 0000-00-00          |                | 
+| ip            | int(10) unsigned             | NO   |     | 0                   |                | 
+| domain        | varchar(100)                 | YES  |     | NULL                |                | 
+| exclude       | tinyint(1) unsigned          | NO   |     | 0                   |                | 
+| Confirmed     | int(10) unsigned             | NO   |     | 0                   |                | 
+| ConfirmedIP   | int(10) unsigned             | NO   |     | 0                   |                | 
+| ConfirmedTS   | datetime                     | NO   |     | 0000-00-00 00:00:00 |                | 
+| Opener        | int(10) unsigned             | NO   |     | 0                   |                | 
+| OpenerIP      | int(10) unsigned             | NO   |     | 0                   |                | 
+| OpenerTS      | datetime                     | NO   |     | 0000-00-00 00:00:00 |                | 
+| Clicker       | int(10) unsigned             | NO   |     | 0                   |                | 
+| ClickerIP     | int(10) unsigned             | NO   |     | 0                   |                | 
+| ClickerTS     | datetime                     | NO   |     | 0000-00-00 00:00:00 |                | 
+| country_short | varchar(10)                  | NO   | MUL | NULL                |                | 
++---------------+------------------------------+------+-----+---------------------+----------------+
+

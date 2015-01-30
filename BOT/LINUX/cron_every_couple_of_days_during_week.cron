@@ -1,0 +1,2 @@
+# copy tblmaster files while preserving permissions and ownership to a backup directory at 19 minutes after 4 AM every couple of days during the week.
+17      4       *       *       2,4   cp -p /var/lib/mysql/datastore/tblmaster.* /var/lib/mysql/datastore_backup/

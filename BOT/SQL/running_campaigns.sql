@@ -1,0 +1,1 @@
+select AccountID, StatusInt from emarketing.campaigns where removed = 0 and (StatusInt = '400' OR StatusInt = '200' OR StatusInt = '500' OR StatusInt = '600' OR StatusInt = '1000') and AccountID = 7609 ;

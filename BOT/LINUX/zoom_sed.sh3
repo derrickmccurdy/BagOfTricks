@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#need to empty out the old temp files.
+HOLDER=/home/derrick/drive2/zoom/one.csv
+RESULT=/home/derrick/drive2/zoom/result.csv
+echo "" > $HOLDER
+echo "Email,jobtitle,lastname,firstname,companyname,phonenum" > $RESULT
+
+
+HTMLFILES=`find /home/derrick/drive2/zoom/$1/ -name "*.htm*"`
+for r in $HTMLFILES; do
+       echo "$r"
+	sed -n -e "
+	/.*mailto:.*/ {
+	H
+	n
+	H
+	n
+	H
+	n
+	H
+	n
+	x
+	s/.*linkPerson[^>]*>\([^<]*\)<.*mailto:\([^\"]*\)\".*\n[^<]*[^>]*>\([^<]*\)<.*\n\(.*\)\n\(.*\)/\2\t\3\t\1\t\4\t\5/
+	s/<td class=\"SRC\">//
+	s/<a [^>]*>//
+	s/<\/a><br>\([^;]*\)&nbsp;.*/\t\1\t/
+	s/<.*$//
+	s/^\([^\t]*\)\t\([^\t]*\)\t\([^,]*\), \(.*\)$/\1\t\2\t\3\t\4/
+	s/\t\t/\t/
+	s/&nbsp;//g
+	s/	$//
+	s/^\([^	]\+\)	\([^	]\+\)	\([^	]\+\)	\([^	]\+\)	\([^	]\+\)$/\1	\2	\3	\4	\5	/
+	s/	/\",\"/g
+	s/^\|$/\"/g
+	p
+	}" < $r >> $RESULT
+
+done
+find /home/derrick/drive2/zoom/ -name "*.htm*" -exec rm -f '{}' \;
+echo $RESULT

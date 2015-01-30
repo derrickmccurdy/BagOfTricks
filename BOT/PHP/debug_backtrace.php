@@ -1,0 +1,1 @@
+error_log(serialize(debug_backtrace()));//a:1:{i:0;a:4:{s:4:"file";s:76:"/home/derrick.my-login.net/TRUNK/_apps/_emarketing/inhouse_builder_count.php";s:4:"line";i:1076;s:8:"function";s:10:"getHeaders";s:4:"args";a:1:{i:0;a:2:{i:0;s:0:"";i:1;s:0:"";}}}}

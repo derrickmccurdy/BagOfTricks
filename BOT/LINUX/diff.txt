@@ -1,0 +1,1 @@
+echo "" > /tmp/diff.txt; diff --exclude=.svn -r -c -b -B /home/trunk.my-login.net/httpdocs/ /home/derrick.my-login.net/httpdocs/ >> /tmp/diff.txt ; vim /tmp/diff.txt

@@ -1,0 +1,1 @@
+select count(*) from datastore.tblmaster WHERE region IN('TX') AND  ( born <> '0000-00-00' AND  born <= '1942-10-28'  ) AND                   (CAST(substring(`zipcode`, 1, 5) AS SIGNED ) >= 77000  AND       CAST(substring(`zipcode`,1,5) AS SIGNED ) <= 77500 ) ;

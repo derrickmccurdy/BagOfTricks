@@ -1,0 +1,3 @@
+ls -yz >> command.log 2>&1
+
+redirects stderr and stdout to command.log in append mode.

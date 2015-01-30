@@ -1,0 +1,40 @@
+This is python code to generate a permutation or combination set of column names for indexes.
+
+Type "python" at the command line and paste this in.
+
+def all_perms(str):
+    if len(str) <=1:
+        yield str
+    else:
+        for perm in all_perms(str[1:]):
+            for i in range(len(perm)+1):
+                yield perm[:i] + str[0:1] + perm[i:]
+
+
+
+Then paste this line after it with the column names you need iterated through.
+for p in all_perms(['zip','','']):
+
+Then paste this.
+	print p
+
+
+
+
+
+
+
+
+def all_perms(str):
+    if len(str) <=1:
+        yield str
+    else:
+        for perm in all_perms(str[1:]):
+            for i in range(len(perm)+1):
+                yield perm[:i] + str[0:1] + perm[i:]
+
+
+for p in all_perms(['zip','','']):
+	print p
+
+

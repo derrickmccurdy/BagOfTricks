@@ -1,0 +1,88 @@
+1. If a method can be static, declare it static. Speed improvement is by a factor of 4.
+
+2. echo is faster than print.
+
+3. Use echo’s multiple parameters instead of string concatenation.
+
+4. Set the maxvalue for your for-loops before and not in the loop.
+
+5. Unset your variables to free memory, especially large arrays.
+
+6. Avoid magic like __get, __set, __autoload
+
+7. require_once() is expensive
+
+8. Use full paths in includes and requires, less time spent on resolving the OS paths.
+
+9. If you need to find out the time when the script started executing, $_SERVER[’REQUEST_TIME’] is preferred to time()
+
+10. See if you can use strncasecmp, strpbrk and stripos instead of regex
+
+11. str_replace is faster than preg_replace, but strtr is faster than str_replace by a factor of 4
+
+12. If the function, such as string replacement function, accepts both arrays and single characters as arguments, and if your argument list is not too long, consider writing a few redundant replacement statements, passing one character at a time, instead of one line of code that accepts arrays as search and replace arguments.
+
+13. It’s better to use switch statements than multi if, else if, statements.
+
+14. Error suppression with @ is very slow.
+
+15. Turn on apache’s mod_deflate
+
+16. Close your database connections when you’re done with them
+
+17. $row[’id’] is 7 times faster than $row[id]
+
+18. Error messages are expensive
+
+19. Do not use functions inside of for loop, such as for ($x=0; $x < count($array); $x) The count() function gets called each time.
+
+20. Incrementing a local variable in a method is the fastest. Nearly the same as calling a local variable in a function.
+
+21. Incrementing a global variable is 2 times slow than a local var.
+
+22. Incrementing an object property (eg. $this->prop++) is 3 times slower than a local variable.
+
+23. Incrementing an undefined local variable is 9-10 times slower than a pre-initialized one.
+
+24. Just declaring a global variable without using it in a function also slows things down (by about the same amount as incrementing a local var). PHP probably does a check to see if the global exists.
+
+25. Method invocation appears to be independent of the number of methods defined in the class because I added 10 more methods to the test class (before and after the test method) with no change in performance.
+
+26. Methods in derived classes run faster than ones defined in the base class.
+
+27. A function call with one parameter and an empty function body takes about the same time as doing 7-8 $localvar++ operations. A similar method call is of course about 15 $localvar++ operations.
+
+28. Surrounding your string by ‘ instead of ” will make things interpret a little faster since php looks for variables inside “…” but not inside ‘…’. Of course you can only do this when you don’t need to have variables in the string.
+
+29. When echoing strings it’s faster to separate them by comma instead of dot. Note: This only works with echo, which is a function that can take several strings as arguments.
+
+30. A PHP script will be served at least 2-10 times slower than a static HTML page by Apache. Try to use more static HTML pages and fewer scripts.
+
+31. Your PHP scripts are recompiled every time unless the scripts are cached. Install a PHP caching product to typically increase performance by 25-100% by removing compile times.
+
+32. Cache as much as possible. Use memcached – memcached is a high-performance memory object caching system intended to speed up dynamic web applications by alleviating database load. OP code caches are useful so that your script does not have to be compiled on every request
+
+33. When working with strings and you need to check that the string is either of a certain length you’d understandably would want to use the strlen() function. This function is pretty quick since it’s operation does not perform any calculation but merely return the already known length of a string available in the zval structure (internal C struct used to store variables in PHP). However because strlen() is a function it is still somewhat slow because the function call requires several operations such as lowercase & hashtable lookup followed by the execution of said function. In some instance you can improve the speed of your code by using an isset() trick.
+
+Ex.
+if (strlen($foo) < 5) { echo “Foo is too short”; }
+vs.
+if (!isset($foo{5})) { echo “Foo is too short”; }
+
+Calling isset() happens to be faster then strlen() because unlike strlen(), isset() is a language construct and not a function meaning that it’s execution does not require function lookups and lowercase. This means you have virtually no overhead on top of the actual code that determines the string’s length.
+
+34. When incrementing or decrementing the value of the variable $i++ happens to be a tad slower then ++$i. This is something PHP specific and does not apply to other languages, so don’t go modifying your C or Java code thinking it’ll suddenly become faster, it won’t. ++$i happens to be faster in PHP because instead of 4 opcodes used for $i++ you only need 3. Post incrementation actually causes in the creation of a temporary var that is then incremented. While pre-incrementation increases the original value directly. This is one of the optimization that opcode optimized like Zend’s PHP optimizer. It is a still a good idea to keep in mind since not all opcode optimizers perform this optimization and there are plenty of ISPs and servers running without an opcode optimizer.
+
+35. Not everything has to be OOP, often it is too much overhead, each method and object call consumes a lot of memory.
+
+36. Do not implement every data structure as a class, arrays are useful, too
+
+37. Don’t split methods too much, think, which code you will really re-use
+
+38. You can always split the code of a method later, when needed
+
+39. Make use of the countless predefined functions
+
+40. If you have very time consuming functions in your code, consider writing them as C extensions
+
+41. Profile your code. A profiler shows you, which parts of your code consumes how many time. The Xdebug debugger already contains a profiler. Profiling shows you the bottlenecks in overview

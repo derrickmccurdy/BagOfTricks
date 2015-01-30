@@ -1,0 +1,1 @@
+mysqldump -d -E --triggers -u admin -p datastore -h master > master_struct.sql

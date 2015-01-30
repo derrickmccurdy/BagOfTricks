@@ -1,0 +1,8 @@
+/sudo/etc/init.d/mysql stop
+
+
+mysql_admin -u admin -p shutdown
+
+
+sudo killall -9 mysqld mysqld_safe
+

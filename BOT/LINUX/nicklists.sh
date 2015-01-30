@@ -1,0 +1,3 @@
+#!/bin/bash
+# this is not quite right... it will go through every file and what it needs to do is find 1000 and stop...
+find /home/derrick/drive2/zoom/ -name "*.csv" -exec grep -m1000 "$1" '{}' \; | head -n1000 > /tmp/$1.csv

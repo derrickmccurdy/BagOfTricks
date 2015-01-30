@@ -1,0 +1,58 @@
+#On master list server
+
+RENAME TABLE datastore.tblbounces TO datastore.tblbounces_old, datastore.tblbounces_new TO datastore.tblbounces, system.tblglobal_individual TO system.tblglobal_individual_old, system.tblglobal_individual_new TO system.tblglobal_individual ;
+
+DROP trigger system.temp_trigger_individuals ;
+DROP trigger datastore.temp_trigger_bounces ;
+
+#on all list servers
+sudo rsync -avz --progress -e ssh master:/var/lib/mysql/datastore/tblbounces.* /var/lib/mysql/datastore/
+sudo rsync -avz --progress -e ssh master:/var/lib/mysql/system/tblglobal_individual.*  /var/lib/mysql/system/
+
+#on dev
+cp _components/_leads/pages/addabuseEmail.php ~derrick/addabuseEmail.php
+cp _components/_emarketing/libraries/lib.scheduler.php ~derrick/lib.scheduler.php
+#on prod
+sudo cp -p ~derrick/addabuseEmail.php /home/my-login.net/httpdocs/_components/_leads/pages/addabuseEmail.php
+sudo cp -p ~derrick/lib.scheduler.php /home/my-login.net/httpdocs/_components/_emarketing/libraries/lib.scheduler.php
+
+#on local machine
+scp BOT/SQL/suppression.sql master:/tmp/suppression.sql
+
+#on master at sql command prompt
+source /tmp/suppression.sql
+
+#debug and install BOT/SQL/master_daily_event.event2.sql
+scp BOT/SQL/master_daily_event.event2.sql master:/tmp/master_daily_event.event2.sql
+#step through to debug
+# install new version of master daily event from sql prompt on master
+source /tmp/master_daily_event.event2.sql
+
+#on master after everything is going well
+drop event datastore.fill_email_hash
+
+#IF THINGS GO PEAR SHAPED....
+
+#On master list server
+RENAME TABLE datastore.tblbounces TO datastore.tblbounces_new, datastore.tblbounces_old TO datastore.tblbounces, system.tblglobal_individual TO system.tblglobal_individual_new, system.tblglobal_individual_old TO system.tblglobal_individual ;
+
+#add the trigger back on master at sql prompt
+source /tmp/temp_trigger_individuals.sql
+source /tmp/temp_trigger_bounces.sql
+
+#on all list servers
+sudo rsync -avz --progress -e ssh master:/var/lib/mysql/datastore/tblbounces.* /var/lib/mysql/datastore/
+sudo rsync -avz --progress -e ssh master:/var/lib/mysql/system/tblglobal_individual.*  /var/lib/mysql/system/
+
+#on local machine, remove this text from line 74 of BOT/SQL/suppression.sql " AND g.Status = 173"
+scp BOT/SQL/suppression.sql master:/tmp/suppression.sql
+
+#on master at sql command prompt
+source /tmp/suppression.sql
+
+#reinstall old  BOT/SQL/master_daily_event.event.sql
+scp BOT/SQL/master_daily_event.event.sql master:/tmp/master_daily_event.event.sql
+# install old version of master daily event from sql prompt on master
+source /tmp/master_daily_event.event.sql
+
+

@@ -1,0 +1,24 @@
+http://dev.mysql.com/doc/refman/5.1/en/replication-rules.html
+
+http://dev.mysql.com/doc/refman/5.1/en/replication-rules-db-options.html
+
+http://dev.mysql.com/doc/refman/5.1/en/replication-rules-table-options.html
+
+MASTER LEVEL
+1 DB level
+	1a binlog-do-db
+	1b binlog-ignore-db
+2 table level
+	2a 
+	2b 
+
+
+SLAVE LEVEL
+1 DB level
+	1a replicate-do-db
+	1b replicate-ignore-db
+2 table level
+	2a replicate-do-table 
+	2b replicate-ignore-table
+	2c replicate-wild-do-table
+	2d replicate-wild-ignore-table

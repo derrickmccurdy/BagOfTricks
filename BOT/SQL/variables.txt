@@ -1,0 +1,10 @@
+http://dev.mysql.com/doc/refman/5.1/en/server-options.html
+http://dev.mysql.com/doc/refman/5.1/en/replication-options-table.html
+
+
+SET          sort_buffer_size = <value>;
+SET GLOBAL   sort_buffer_size = <value>;
+SET        @@sort_buffer_size := <value>;
+SET @@session.sort_buffer_size := <value>;
+SET @@global.sort_buffer_size := <value>;
+
